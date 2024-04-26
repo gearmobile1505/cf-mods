@@ -39,6 +39,24 @@ Resources:
       AvailabilityZone: us-west-2a
       Encrypted: true   # Enable encryption
 
+
+
+Resources:
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-xxxxxxxxxxxxx  # Specify your desired AMI ID
+      InstanceType: t2.micro  # Specify your desired instance type
+      SecurityGroupIds:
+        - sg-xxxxxxxxxxxxxx  # Specify your security group ID
+      SubnetId: subnet-xxxxxxxxxxxx  # Specify your subnet ID
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          yum update -y  # Update package repositories
+          yum install -y httpd  # Install Apache web server
+          systemctl start httpd  # Start Apache
+          systemctl enable httpd  # Enable Apache to start on boot
       
 
 
